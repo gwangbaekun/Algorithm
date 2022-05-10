@@ -1,16 +1,23 @@
-import test
 import sys
+# 파일 열기 모듈
+# 복수 줄
 sys.stdin = open("python.txt", "r")
-input = sys.stdin.readline
+input = sys.stdin.readlines()
+A,B = map(int, input[0].strip().split())
+C = input[1]
+# 한 줄
+# sys.stdin = open("python.txt", "r")
+# input = sys.stdin.readline()
+A += C // 60
+B += C % 60
 
-def cont():
-    while(True):
-        try:
-            problem.main0()
-        except Exception as e:
-            print("exception =", e)
-            return
+if B >= 60:
+    A += 1
+    B -= 60
+if A >= 24:
+    A -= 24
 
-if _name_ == "__main__":
-    problem.main(0)()
-    cont()
+print(A, B)
+
+sys.stdin.close()
+

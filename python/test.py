@@ -1,13 +1,20 @@
-x = int(input())
-y = int(input())
+import sys
+# 파일 열기 모듈
+# 복수 줄
+# sys.stdin = open("python.txt", "r")
+input = sys.stdin.readlines()
+A,B = map(int, input[0].strip().split())
+C = int(input[1])
+# 한 줄
+# sys.stdin = open("python.txt", "r")
+# input = sys.stdin.readline()
+A += C // 60
+B += C % 60
 
-if x > 0:
-    if y > 0:
-        print("1")
-    else:
-        print("4")
-else:
-    if y > 0:
-        print("2")
-    else:
-        print("3")
+if B >= 60:
+    A += 1
+    B -= 60
+if A >= 24:
+    A -= 24
+
+print(A, B)
