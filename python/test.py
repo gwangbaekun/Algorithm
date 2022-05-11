@@ -1,9 +1,10 @@
 import sys
 # 파일 열기 모듈
 # 복수 줄
-# sys.stdin = open("python.txt", "r")
-input = sys.stdin.readlines()
-A,B = map(int, input[0].strip().split())
+sys.stdin = open("python.txt", "r")
+input = sys.stdin.readline()
+print(input[0].strip())
+A,B = map(int, input[0].strip())
 C = int(input[1])
 # 한 줄
 # sys.stdin = open("python.txt", "r")

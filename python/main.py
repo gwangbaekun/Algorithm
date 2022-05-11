@@ -1,23 +1,21 @@
 import sys
-# 파일 열기 모듈
-# 복수 줄
-sys.stdin = open("python.txt", "r")
-input = sys.stdin.readlines()
-A,B = map(int, input[0].strip().split())
-C = input[1]
-# 한 줄
+
 # sys.stdin = open("python.txt", "r")
-# input = sys.stdin.readline()
-A += C // 60
-B += C % 60
+input = sys.stdin.readline()
+A,B,C = map(int, input.strip().split())
 
-if B >= 60:
-    A += 1
-    B -= 60
-if A >= 24:
-    A -= 24
+if (A == B == C):
+    print(10000 + A * 1000)
+elif (A == B):
+    print(1000 + A * 100)
+elif (B == C):
+    print(1000 + B * 100)
+elif (C == A):
+    print(1000 + C * 100)
+else:
+    print(100 * max(A,B,C))
+    
 
-print(A, B)
 
-sys.stdin.close()
+# sys.stdin.close()
 
