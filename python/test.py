@@ -1,60 +1,31 @@
-import queue
 import sys
-from collections import deque
 
-sys.stdin = open("python.txt", "r")
+# sys.stdin = open("python.txt", "r")
 
-N = int(sys.stdin.readline())
+word = sys.stdin.readline().strip()
 
-graph = []
-c = [[0]*N for _ in range(N)]
+upWord = word.upper()
+wordSet = list(set(upWord))
 
-for _ in range(N):
-    graph.append(list(map(str, sys.stdin.readline().strip())))
+countlist = []
+for char in wordSet:
+    count = 0
+    for i in upWord:
+        if char == i:
+            count += 1
+    countlist.append(count)
 
-def bfs(x, y):
-    dx = [-1, 1, 0, 0]
-    dy = [0, 0, -1, 1]
+def max_num(list):
+    arr = []
+    for i in range(len(list)):
+        if list[i] == max(list):
+            arr.append(i)
+    if len(arr) == 1:
+        return arr[0]
+    else:
+        return "?"
 
-    queue = deque()
-    queue.append((x, y))
-
-    while queue:
-        x, y = queue.popleft()
-
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-
-            if nx < 0 or nx >= N or ny < 0 or ny >= N:
-                continue
-            
-            if graph[nx][ny] == graph[x][y] and c[nx][ny] == 0:
-                queue.append((nx,ny))
-                c[nx][ny] = 1
-
-cnt = 0
-for i in range(N):
-    for j in range(N):
-        if c[i][j] == 0:
-            bfs(i, j)
-            print(c)    
-            cnt += 1
-
-print(cnt, end=" ")
-
-for i in range(N):
-    for j in range(N):
-        if graph[i][j] == 'R':
-            graph[i][j] = "G"
-
-c = [[0]*N for _ in range(N)]
-cnt = 0
-
-for i in range(N):
-    for j in range(N):
-        if c[i][j] == 0:
-            bfs(i,j)
-            cnt += 1
-
-print(cnt)
+if max_num(countlist) == '?':
+    print("?")
+else:
+    print(wordSet[max_num(countlist)])
