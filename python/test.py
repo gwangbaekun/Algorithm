@@ -2,19 +2,9 @@ import sys
 
 # sys.stdin = open("python.txt", "r")
 
-N = int(sys.stdin.readline().strip())
-
-arr = list(sys.stdin.readline().strip() for _ in range(N))
-
+A, B, C = map(int, sys.stdin.readline().strip().split())
 count = 0
-for word in arr:
-    chars = []
-    for i in word:
-        if i in chars and chars[-1] is not i:
-            count += -1
-            break
-        else:
-            chars.append(i)
-    count += 1
-
-print(count)
+if B >= C:
+    print(-1)
+else:
+    print(A // (C - B) + 1)
