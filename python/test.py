@@ -1,23 +1,22 @@
 import sys
+import time
 
 # sys.stdin = open("python.txt", "r")
+start = time.time()
 N = int(sys.stdin.readline())
 
-# 분자: 1 / 1, 2 / 3, 2, 1 / 1, 2, 3, 4
-# 분모: 1 / 2, 1 / 1, 2, 3 / 4, 3, 2, 1
-
-roomNum = 0
-rooms = 0
-while N > rooms:
-    roomNum += 1
-    rooms += roomNum
-    if roomNum % 2 == 1:
-        top = rooms + 1 - N
-        bottom = roomNum + 1 - top
+for _ in range(N):
+    H, W, G = map(int, sys.stdin.readline().split())
+    height = G % H # 4층
+    number = G // H + 1
+    if height == 0:
+        height = H
+        number = G // H
+    if number < 10:
+        print(str(height) + "0" + str(number))
     else:
-        bottom = rooms + 1 - N
-        top = roomNum + 1 - bottom
+        print(str(height) + str(number))
 
+end = time.time()
 
-print(str(top) + "/" + str(bottom))
-
+# print(f'{end-start:.5f} sec')
