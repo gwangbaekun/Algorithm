@@ -1,33 +1,31 @@
 import sys
 import time
-# from hooks.isPrime import primenum
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+M = int(sys.stdin.readline())    
+N = int(sys.stdin.readline())    
 
-nums = list(map(int, sys.stdin.readline().split()))
+primeNums = []
+for x in range(M, N+1):
+    error = 0
+    if x > 1:
+        for i in range(2, x):
+            if x % i == 0:
+                error += 1
+                break
+        if error == 0:
+            primeNums.append(x)
 
-def primenum(x):
-    if x == 1:
-        return False
-    for i in range(2, int(x ** 0.5) + 1):
-        if x % i == 0:
-            return False
-    return True
-
-numCount = 0
-for num in nums:
-    if primenum(num):
-        numCount += 1
-
-print(numCount)
-# print(int(math.sqrt(4) + 1))
+if len(primeNums) > 0:
+    print(sum(primeNums), primeNums[0], sep='\n')
+else:
+    print(-1)
 
 # 주석------------
-# end = time.time()
-# print(f"{end - start:.5f} sec")
+end = time.time()
+print(f"{end - start:.5f} sec")
 #----------------
