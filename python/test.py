@@ -7,18 +7,23 @@ import time
 # start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
-d = 2
-sqrt = int(math.sqrt(N))
+case = int(sys.stdin.readline())
 
-while d <= sqrt:
-    if N % d != 0:
-        d += 1
-    else:
-        print(d)
-        N //= d
-if N > 1:
-    print(N)
+def isPrime(x):
+    for i in range(2, int(math.sqrt(x)) + 1):
+        if x % i == 0:
+            return False
+    return True
+
+for _ in range(case):
+    n = int(sys.stdin.readline())
+    a, b = n//2, n//2
+    while a > 0:
+        if isPrime(a) and isPrime(b):
+            print(a, b)
+            break
+        a -= 1
+        b += 1
 
 # 주석------------
 # end = time.time()
