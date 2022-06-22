@@ -1,5 +1,4 @@
 import sys
-import math
 import time
 
 # 주석------------
@@ -7,15 +6,22 @@ import time
 # start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+def reculsive_fn(n, x):
+    space = '____' * (n-x)
+    a = space + '\"재귀함수가 뭔가요?\"' + '\n' + space + '\"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.' + '\n' + space + '마을 사람들은 모두 그 선인에게 수많은 질문을 했고, 모두 지혜롭게 대답해 주었지.' + '\n' + space + '그의 답은 대부분 옳았다고 하네. 그런데 어느 날, 그 선인에게 한 선비가 찾아와서 물었어.\"'
+    a_prime = space + '\"재귀함수가 뭔가요?\"' + '\n' + space + "\"재귀함수는 자기 자신을 호출하는 함수라네\""
+    b = space + "라고 답변하였지."
 
-def multi(x):
-    result = 1
-    if x > 0:
-        result = x * multi(x-1)
-    return result
+    if x == 0:
+        return a_prime + '\n'+ b
+    if x >= 1:
+        return  a + '\n' + reculsive_fn(n, x-1) + '\n' + b
 
-print(multi(N))
+N = int(input())
+k = N
+
+print('어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.')
+print(reculsive_fn(N, k))
 
 # 주석------------
 # end = time.time()
