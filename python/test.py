@@ -2,38 +2,44 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
-Num = sys.stdin.readline()
+N, M = map(int, sys.stdin.readline().split())
+cards = list(map(int, sys.stdin.readline().split()))
 
-def block_reculsive(N):
-    if (N == 1):
-        track = [[1, 3]]
-        return track
+# combination
+def combination(arr, num):
+    result = []
+    if num == 0:
+        return [[]]
 
-    track = block_reculsive(N - 1)
+    for i in range(len(arr)):
+        elem = arr[i]
+        for rest in combination(arr[i + 1:], num - 1):
+            result.append([elem] + rest)
+    return result
 
-    if (N % 2 == 1):
-        track.append([3,2])
-        track.append([1,2])
-        track.append([1,3])
-        return track
+blackjack_sum = []
 
-    
-    if (N % 2 == 0):
-        track.append([2,3])
-        track.append([2,1])
-        track.append([1,3])
-        return track
+# find sum
+for i in combination(cards, 3):
+    combination_sum = 0
+    for j in i:
+        combination_sum = combination_sum + j
+    blackjack_sum.append(combination_sum)
 
-for block in block_reculsive(Num):
-    print(block)
+answer = 0
+# find smallest
+for i in blackjack_sum:
+    contrast = M - i
+    if (contrast >= 0 and contrast < M - answer):
+        answer = i
 
-
+print(answer)
 
 # 주석------------
-end = time.time()
-print(f"{end - start:.5f} sec")
+# end = time.time()
+# print(f"{end - start:.5f} sec")
 #----------------
