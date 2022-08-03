@@ -2,44 +2,27 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N, M = map(int, sys.stdin.readline().split())
-cards = list(map(int, sys.stdin.readline().split()))
+N = int(sys.stdin.readline())
 
-# combination
-def combination(arr, num):
-    result = []
-    if num == 0:
-        return [[]]
+result = 0
 
-    for i in range(len(arr)):
-        elem = arr[i]
-        for rest in combination(arr[i + 1:], num - 1):
-            result.append([elem] + rest)
-    return result
+for i in range(1, N+1):
+    A = list(map(int, str(i)))
+    result = i + sum(A)
 
-blackjack_sum = []
+    if (result == N):
+        print(i)
+        break
 
-# find sum
-for i in combination(cards, 3):
-    combination_sum = 0
-    for j in i:
-        combination_sum = combination_sum + j
-    blackjack_sum.append(combination_sum)
+    if i == N:
+        print(0)
 
-answer = 0
-# find smallest
-for i in blackjack_sum:
-    contrast = M - i
-    if (contrast >= 0 and contrast < M - answer):
-        answer = i
-
-print(answer)
 
 # 주석------------
-# end = time.time()
-# print(f"{end - start:.5f} sec")
+end = time.time()
+print(f"{end - start:.5f} sec")
 #----------------
