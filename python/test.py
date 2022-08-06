@@ -1,58 +1,45 @@
-import sys
 import time
+import sys
+from collections import Counter
 
 # 주석------------
 sys.stdin = open('python.txt', 'r')
-# start = time.time()
+start = time.time()
 #----------------
+N = int(sys.stdin.readline())
+nums = [int(sys.stdin.readline().strip()) for _ in range(N)]
 
-N, M = map(int ,sys.stdin.readline().split())
-A = [sys.stdin.readline().strip() for _ in range(M)]
+def mean(nums):
+    return round(sum(nums)/len(nums))
 
-b_row = 'BWBWBWBW'
-w_row = 'WBWBWBWB'
+def median(nums):
+    nums.sort()
+    mid = nums[len(nums)//2] # nums의 개수는 홀수
+    
+    return mid
 
-# 시작점을 골라서
-_result = []
-for i in range(N - 8 + 1):
-    for j in range(M - 8 + 1):
-        _result.append([i, j])
+def mode(nums):
+    mode_dict = Counter(nums)
+    modes = mode_dict.most_common()    
+    
+    if len(nums) > 1 : 
+        if modes[0][1] == modes[1][1]:
+            mod = modes[1][0]
+        else : 
+            mod = modes[0][0]
+    else : 
+        mod = modes[0][0]
 
-result = []
-# 체스판 만들기
-for start in _result:
-    chessBoard = []
-    count = 0
-    B = A[start[0]:start[0] + 8]
-    for chess in B:
-        chessBoard.append(chess[start[1]: start[1] + 8])
+    return mod
+        
+def scope(nums):
+    return max(nums) - min(nums)
 
-    which_is_smaller = []
-    # 정상 체스보드와 비교
-    for i in range(8):
-        for j in range(8):
-            if (i % 2 == 0):
-                if (b_row[j] != chessBoard[i][j]):
-                    count += 1
-            else:
-                if (w_row[j] != chessBoard[i][j]):
-                    count += 1
-    which_is_smaller.append(count)
-    count = 0
-    for i in range(8):
-        for j in range(8):
-            if (i % 2 == 0):
-                if (w_row[j] != chessBoard[i][j]):
-                    count += 1
-            else:
-                if (b_row[j] != chessBoard[i][j]):
-                    count += 1
-    which_is_smaller.append(count)
-    result.append(min(which_is_smaller))
-
-print(min(result))
+print(mean(nums))
+print(median(nums))
+print(mode(nums))
+print(scope(nums))
 
 # 주석------------
-# end = time.time()
-# print(f"{end - start:.5f} sec")
+print("time : ", time.time() - start)
 #----------------
