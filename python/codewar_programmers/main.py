@@ -1,26 +1,17 @@
-def valid_parentheses(string):
-    valid = True
+def generate_hashtag(s):
+    string = "#"
+    for charIndex in range(0,len(s)):
+        char = s[charIndex]
+        if char != " ":
+            if s[charIndex - 1] == " ":
+                string += char.upper()
+            elif charIndex == 0:
+                string += char.upper()
+            else:
+                string += char.lower()
     
-    if (string == ''): 
-        return True
-    new_str = ""
-    for str in string:
-        if (str == '(' or str == ')'):
-            new_str = new_str + str
-
-    if (new_str[0] != '('):
-        valid = False
-    if (new_str[-1] != ')'):
-        valid = False
-
-    n = 0
-    for str in new_str:
-        if (str == '('):
-            n = n + 1
-        else:
-            n = n - 1
-            if (n < 0):
-                return False
-    if (n != 0):
-        valid = False
-    return valid
+    if (string == "#"):
+        return False
+    if (len(string) >= 140):
+        return False
+    return string
