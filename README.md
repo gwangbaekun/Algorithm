@@ -1,15 +1,23 @@
-A Narcissistic Number is a positive number which is the sum of its own digits, each raised to the power of the number of digits in a given base. In this Kata, we will restrict ourselves to decimal (base 10).
+Some numbers have funny properties. For example:
 
-For example, take 153 (3 digits), which is narcisstic:
+89 --> 8¹ + 9² = 89 \* 1
 
-    1^3 + 5^3 + 3^3 = 1 + 125 + 27 = 153
+695 --> 6² + 9³ + 5⁴= 1390 = 695 \* 2
 
-and 1652 (4 digits), which isn't:
+46288 --> 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 \* 51
 
-    1^4 + 6^4 + 5^4 + 2^4 = 1 + 1296 + 625 + 16 = 1938
+Given a positive integer n written as abcd... (a, b, c, d... being digits) and a positive integer p
 
-The Challenge:
+we want to find a positive integer k, if it exists, such that the sum of the digits of n taken to the successive powers of p is equal to k \* n.
+In other words:
 
-Your code must return true or false (not 'true' and 'false') depending upon whether the given number is a Narcissistic number in base 10. This may be True and False in your language, e.g. PHP.
+Is there an integer k such as : (a ^ p + b ^ (p+1) + c ^(p+2) + d ^ (p+3) + ...) = n \* k
 
-Error checking for text strings or other invalid inputs is not required, only valid positive non-zero integers will be passed into the function.
+If it is the case we will return k, if not return -1.
+
+Note: n and p will always be given as strictly positive integers.
+
+dig_pow(89, 1) should return 1 since 8¹ + 9² = 89 = 89 _ 1
+dig_pow(92, 1) should return -1 since there is no k such as 9¹ + 2² equals 92 _ k
+dig_pow(695, 2) should return 2 since 6² + 9³ + 5⁴= 1390 = 695 _ 2
+dig_pow(46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 _ 51
