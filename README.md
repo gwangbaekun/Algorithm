@@ -1,23 +1,8 @@
-Some numbers have funny properties. For example:
+문제
+N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로그램을 작성하시오.
 
-89 --> 8¹ + 9² = 89 \* 1
+입력
+첫째 줄에 수의 개수 N(1 ≤ N ≤ 1,000)이 주어진다. 둘째 줄부터 N개의 줄에는 수 주어진다. 이 수는 절댓값이 1,000보다 작거나 같은 정수이다. 수는 중복되지 않는다.
 
-695 --> 6² + 9³ + 5⁴= 1390 = 695 \* 2
-
-46288 --> 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 \* 51
-
-Given a positive integer n written as abcd... (a, b, c, d... being digits) and a positive integer p
-
-we want to find a positive integer k, if it exists, such that the sum of the digits of n taken to the successive powers of p is equal to k \* n.
-In other words:
-
-Is there an integer k such as : (a ^ p + b ^ (p+1) + c ^(p+2) + d ^ (p+3) + ...) = n \* k
-
-If it is the case we will return k, if not return -1.
-
-Note: n and p will always be given as strictly positive integers.
-
-dig_pow(89, 1) should return 1 since 8¹ + 9² = 89 = 89 _ 1
-dig_pow(92, 1) should return -1 since there is no k such as 9¹ + 2² equals 92 _ k
-dig_pow(695, 2) should return 2 since 6² + 9³ + 5⁴= 1390 = 695 _ 2
-dig_pow(46288, 3) should return 51 since 4³ + 6⁴+ 2⁵ + 8⁶ + 8⁷ = 2360688 = 46288 _ 51
+출력
+첫째 줄부터 N개의 줄에 오름차순으로 정렬한 결과를 한 줄에 하나씩 출력한다.
