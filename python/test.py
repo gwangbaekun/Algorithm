@@ -15,7 +15,6 @@ nums.sort()
 
 for i in nums:
     print(i)
-
 # 주석------------
 # print("time : ", time.time() - start)
 #----------------
