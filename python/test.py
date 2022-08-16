@@ -6,20 +6,14 @@ import sys
 # start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+N, M = map(int,sys.stdin.readline().split())
 
-check_list = [0] * 10001
+scores = list(map(int, sys.stdin.readline().split()))
 
-nums = []
-for i in range(N):
-    num = int(sys.stdin.readline().strip())
+scores.sort()
 
-    check_list[num] = check_list[num] + 1
+print(scores[-M:][0])
 
-for i in range(10001):
-    if check_list[i] != 0:
-        for j in range(check_list[i]):
-            print(i) 
 # 주석------------
 # print("time : ", time.time() - start)
 #----------------
