@@ -2,18 +2,22 @@ import time
 import sys
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N, M = map(int,sys.stdin.readline().split())
+N = int(sys.stdin.readline())
 
-scores = list(map(int, sys.stdin.readline().split()))
+arr = []
 
-scores.sort()
+for i in str(N):
+    arr.append(int(i))
 
-print(scores[-M:][0])
+arr.sort(reverse=True)
+
+for i in arr:
+    print(i, end="")
 
 # 주석------------
-# print("time : ", time.time() - start)
+print("time : ", time.time() - start)
 #----------------
