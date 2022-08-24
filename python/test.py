@@ -2,28 +2,19 @@ import time
 import sys
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
+N = int(sys.stdin.readline())
 
-n = int(input())
+to_sort = [list(sys.stdin.readline().split()) for _ in range(N)]
 
-word = []
-for i in range(n):
-    word.append(input())
+to_sort.sort(key=lambda x: int(x[0]))
 
-set_word = list(set(word))
-
-sort_word = []
-
-for i in set_word:
-    sort_word.append((len(i), i))
-
-result = sorted(sort_word)
-
-print(result)
+for i in to_sort:
+    print(" ".join(i))
 
 # 주석------------
-print("time : ", time.time() - start)
+# print("time : ", time.time() - start)
 #----------------
