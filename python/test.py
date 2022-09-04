@@ -2,34 +2,31 @@ import time
 import sys
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
 N = int(sys.stdin.readline())
-have_list = list(map(int, sys.stdin.readline().split(" ")))
+list_n = list(map(int, sys.stdin.readline().split(" ")))
 M = int(sys.stdin.readline())
-check_list = list(map(int, sys.stdin.readline().split(" ")))
+list_m = list(map(int, sys.stdin.readline().split(" ")))
 
-have_list.sort()
+answer = []
 
-def binary_tree(start, end, list, element):
-    while start <= end:
-        mean = (start + end) // 2
-        if element == list[mean]:
-            return mean
-        elif element < list[mean]:
-            end = mean - 1
-        else:
-            start = mean + 1
-    return None
+count = {}
+for i in list_n:
+    if i in count:
+        count[i] += 1
+    else:
+        count[i] = 1
 
-for i in range(M):
-    if binary_tree(0, N-1, have_list, check_list[i]) is None:
+for i in list_m:
+    result = count.get(i)
+    if result == None:
         print(0, end=" ")
     else:
-        print(1, end=" ")
-
+        print(result, end=" ")
+        
 # 주석------------
-# print("time : ", time.time() - start)
+print("time : ", time.time() - start)
 #----------------
