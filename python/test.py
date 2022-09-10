@@ -3,30 +3,24 @@ import sys
 
 # 주석------------
 sys.stdin = open('python.txt', 'r')
-start = time.time()
+# start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
-list_n = list(map(int, sys.stdin.readline().split(" ")))
-M = int(sys.stdin.readline())
-list_m = list(map(int, sys.stdin.readline().split(" ")))
+N, M = map(int, sys.stdin.readline().split(" "))
+d = set()
+for i in range(N):
+    d.add(sys.stdin.readline().strip())
 
-answer = []
+b = set()
+for i in range(M):
+    b.add(sys.stdin.readline().strip())
 
-count = {}
-for i in list_n:
-    if i in count:
-        count[i] += 1
-    else:
-        count[i] = 1
+result = sorted(list(d & b))
 
-for i in list_m:
-    result = count.get(i)
-    if result == None:
-        print(0, end=" ")
-    else:
-        print(result, end=" ")
-        
+print(len(result))
+for i in result:
+    print(i)
+
 # 주석------------
-print("time : ", time.time() - start)
+# print("time : ", time.time() - start)
 #----------------
