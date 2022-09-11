@@ -2,24 +2,18 @@ import time
 import sys
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
+# sys.stdin = open('python.txt', 'r')
 # start = time.time()
 #----------------
 
 N, M = map(int, sys.stdin.readline().split(" "))
-d = set()
-for i in range(N):
-    d.add(sys.stdin.readline().strip())
+A = set(map(int, sys.stdin.readline().split(" ")))
 
-b = set()
-for i in range(M):
-    b.add(sys.stdin.readline().strip())
+B = set(map(int, sys.stdin.readline().split(" ")))
 
-result = sorted(list(d & b))
+result = sorted(list(A & B))
 
-print(len(result))
-for i in result:
-    print(i)
+print(N + M - 2 * len(result))
 
 # 주석------------
 # print("time : ", time.time() - start)
