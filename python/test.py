@@ -1,19 +1,19 @@
 import time
 import sys
-
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
+sys.stdin = open('python.txt', 'r')
 # start = time.time()
 #----------------
 
-N, M = map(int, sys.stdin.readline().split(" "))
-A = set(map(int, sys.stdin.readline().split(" ")))
+S = input()
 
-B = set(map(int, sys.stdin.readline().split(" ")))
+_set = set()
 
-result = sorted(list(A & B))
+for i in range(len(S)):
+    for j in range(i, len(S)):
+        _set.add(S[i:j+1])
 
-print(N + M - 2 * len(result))
+print(len(_set))
 
 # 주석------------
 # print("time : ", time.time() - start)
