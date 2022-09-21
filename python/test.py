@@ -1,32 +1,21 @@
+import sys
 import time
 # 주석------------
 sys.stdin = open('python.txt', 'r')
 start = time.time()
 #----------------
 
-import sys
-# C = [list(map(int, sys.stdin.readline().split(" "))) for _ in range(3)]
-dictX = {}
-dictY = {}
-for i in range(3):
-    x, y = map(int, sys.stdin.readline().split(" "))
-    if x in dictX:
-        dictX[x] += 1
+while True:
+    a, b, c = map(int, sys.stdin.readline().split(" "))
+    heru = max(a, b, c)
+    ausar = min(a, b, c) 
+    auset = (a+b+c) - heru - ausar
+    if a == 0 and b == 0 and c == 0:
+        break
+    if ausar ** 2 + auset ** 2 == heru ** 2:
+        print("right")
     else:
-        dictX[x] = 1
-    
-    if y in dictY:
-        dictY[y] += 1
-    else:
-        dictY[y] = 1
-
-for key in dictX:
-    if dictX[key] == 1:
-        print(key, end=" ")
-
-for key in dictY:
-    if dictY[key] == 1:
-        print(key)
+        print("wrong")
 
 # 주석------------
 print("time : ", time.time() - start)
