@@ -87,3 +87,9 @@ for (let i = 0; i < B; i++) {
 }
 
 console.log(dayCount);
+
+function (element) {
+  if (element == 3) {
+    return True
+  }
+}

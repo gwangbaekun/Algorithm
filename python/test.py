@@ -1,37 +1,26 @@
 import sys
 import time
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+W,H,X,Y,P = list(map(int ,sys.stdin.readline().split(" ")))
 
-for i in range(N):
-    a = list(map(int, sys.stdin.readline().split(" ")))
-    start = a[:2]
-    end = a[2:]
+count = 0
 
-    start_point_count = 0
-    end_point_count = 0
+for _ in range(P):
+    a, b = list(map(int, sys.stdin.readline().split(" ")))
+    # in square ?
+    if a >= X and a <= X+W and b >= Y and b <= Y+H:
+        count += 1
+    # X, Y+H/2
+    elif (X - a) ** 2 + (Y + H/2 - b) ** 2 <= (H/2) ** 2:
+        count += 1
+    elif (X + W - a) ** 2 + (Y + H/2 - b) ** 2 <= (H/2) ** 2:
+        count += 1
 
-    for i in range(int(sys.stdin.readline())):
-        a = list(map(int, sys.stdin.readline().split(" ")))
-        status_start = None
-        status_end = None
-        if (start[0] - a[0]) ** 2 + (start[1] - a[1]) ** 2 < a[2] ** 2:
-            status_start = True
-            start_point_count += 1
-        if (end[0] - a[0]) ** 2 + (end[1] - a[1]) ** 2 < a[2] ** 2:
-            status_end = True
-            end_point_count += 1
-
-        if status_start and status_end:
-            start_point_count -= 1
-            end_point_count -= 1
-    
-    print(start_point_count + end_point_count)
-
+print(count)
 # 주석------------
-# print("time : ", time.time() - start)
-#----------------
+print("time : ", time.time() - start)
+# ----------------
