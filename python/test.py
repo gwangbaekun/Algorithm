@@ -5,17 +5,17 @@ import time
 # start = time.time()
 #----------------
 
-while True:
-    a, b = map(int, sys.stdin.readline().split())
-    if (a == 0 and b == 0):
-        break
-    if (b % a == 0):
-        print('factor')
-    elif (a % b == 0):
-        print('multiple')
-    else:
-        print('neither')
-   
+N = int(sys.stdin.readline())
+
+modify = list(map(int, sys.stdin.readline().split()))
+
+a = 1
+
+for i in range(N):
+    a *= modify[i]
+
+print(round(a ** (1/(N/2))))
+
 # 주석------------
 # print("time : ", time.time() - start)
 # ----------------
