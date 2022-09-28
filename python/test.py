@@ -5,16 +5,14 @@ import time
 # start = time.time()
 #----------------
 
-A, B = map(int ,sys.stdin.readline().split(" "))
+N = int(sys.stdin.readline())
 
 def gcd(a, b):
     return b > 0 and gcd(b, a % b) or a
 
-g = gcd(A, B)
-m = g * (A // g) * (B // g)
-
-print(g )
-print(m)
+for _ in range(N):
+    a, b = map(int, sys.stdin.readline().split(" "))
+    print(a * b // gcd(a, b))
 
 # 주석------------
 # print("time : ", time.time() - start)
