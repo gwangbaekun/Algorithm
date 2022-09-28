@@ -5,16 +5,16 @@ import time
 # start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+A, B = map(int ,sys.stdin.readline().split(" "))
 
-modify = list(map(int, sys.stdin.readline().split()))
+def gcd(a, b):
+    return b > 0 and gcd(b, a % b) or a
 
-a = 1
+g = gcd(A, B)
+m = g * (A // g) * (B // g)
 
-for i in range(N):
-    a *= modify[i]
-
-print(round(a ** (1/(N/2))))
+print(g )
+print(m)
 
 # 주석------------
 # print("time : ", time.time() - start)
