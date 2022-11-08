@@ -7,30 +7,12 @@ from math import gcd
 #----------------
 
 N = int(sys.stdin.readline())
-arr = []
-to_gcd = 0
 
-for i in range(N):
-    arr.append(int(sys.stdin.readline()))
-    if i == 1:
-        to_gcd = abs(arr[i] - arr[0])
-    to_gcd = gcd(abs(arr[i] - arr[i - 1]), to_gcd)
+board = list(map(int, sys.stdin.readline().split(" ")))
 
-gcd_squ = int(to_gcd ** 0.5)
-
-answer = []
-
-for i in range(2, gcd_squ + 1):
-    if to_gcd % i == 0:
-        answer.append(i)
-        answer.append(to_gcd // i)
-answer.append(to_gcd)
-answer = list(set(answer))
-
-answer.sort()
-
-for i in answer:
-    print(i, end=" ")
+for i in range(1, N):
+    to_gcd = gcd(board[0], board[i])
+    print(str(board[0]//to_gcd) + "/" + str(board[i]//to_gcd))
     
 # 주석------------
 # print("time : ", time.time() - start)
