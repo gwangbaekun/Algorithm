@@ -1,24 +1,23 @@
 import sys
 import time
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
-N, K = map(int, input().split())
+N = int(sys.stdin.readline())
 
-dp = []
+cases = [list(map(int, sys.stdin.readline().split(" "))) for _ in range(N)]
 
-for i in range(N+1):
-    dp.append([1]*(i+1))
+def factorial(N):
+    if N == 0:
+        return 1
+    return N * factorial(N-1)
 
-for i in range(2, N+1):
-    for j in range(1, i):
-        dp[i][j] = (dp[i-1][j-1] + dp[i-1][j])%10007
-
-print(dp[N][K])
-
+for i in cases:
+    N, M = i[0], i[1]
+    print(factorial(M) // factorial(M-N) // factorial(N))
 
 # 주석------------
-print("time : ", time.time() - start)
+# print("time : ", time.time() - start)
 # ----------------
