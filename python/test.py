@@ -2,8 +2,8 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
 N, M = map(int ,sys.stdin.readline().split(" "))
@@ -11,23 +11,16 @@ N, M = map(int ,sys.stdin.readline().split(" "))
 s = []
 
 def dfs():
-    if (len(s) == M):
+    if len(s) == M:
         print(" ".join(map(str, s)))
-        return
-    for i in range(1, N+1):
-        if i not in s:
-            if len(s) > 0:
-                if s[-1] < i:
-                    s.append(i)
-                    dfs()
-                    s.pop()
-            else:
-                s.append(i)
-                dfs()
-                s.pop()
+    else:
+        for i in range(1, N+1):
+            s.append(i)
+            dfs()
+            s.pop()
 
-dfs()
+dfs()                
 
 # 주석------------
-print("time : ", time.time() - start)
+# print("time : ", time.time() - start)
 # ---------------
