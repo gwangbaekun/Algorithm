@@ -15,11 +15,17 @@ def dfs():
         print(" ".join(map(str, s)))
     else:
         for i in range(1, N+1):
-            s.append(i)
-            dfs()
-            s.pop()
+            if (len(s) == 0):
+                s.append(i)
+                dfs()
+                s.pop()
+            else:
+                if (s[-1] <= i):
+                    s.append(i)
+                    dfs()
+                    s.pop()
 
-dfs()                
+dfs()
 
 # 주석------------
 # print("time : ", time.time() - start)
