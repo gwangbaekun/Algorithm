@@ -2,31 +2,37 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N, M = map(int ,sys.stdin.readline().split(" "))
+n = int(input())
 
-s = []
+ans = 0
+row = [0] * n
 
-def dfs():
-    if len(s) == M:
-        print(" ".join(map(str, s)))
+def is_promising(x):
+    for i in range(x):
+        if row[x] == row[i] or abs(row[x] - row[i]) == abs(x - i):
+            return False
+    
+    return True
+
+def n_queens(x):
+    global ans
+    if x == n:
+        ans += 1
+        return
+
     else:
-        for i in range(1, N+1):
-            if (len(s) == 0):
-                s.append(i)
-                dfs()
-                s.pop()
-            else:
-                if (s[-1] <= i):
-                    s.append(i)
-                    dfs()
-                    s.pop()
+        for i in range(n):
+            row[x] = i
+            if is_promising(x):
+                n_queens(x+1)
 
-dfs()
+n_queens(0)
+print(ans)
 
 # 주석------------
-# print("time : ", time.time() - start)
+print("time : ", time.time() - start)
 # ---------------
