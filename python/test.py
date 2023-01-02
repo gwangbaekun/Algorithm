@@ -1,37 +1,37 @@
 import sys
 import time
+import copy
 
 # 주석------------
 sys.stdin = open('python.txt', 'r')
 start = time.time()
 #----------------
+            
+N = int(input())
 
-n = int(input())
+reculsive_count = 0
+dynamic_count = 0
 
-ans = 0
-row = [0] * n
-
-def is_promising(x):
-    for i in range(x):
-        if row[x] == row[i] or abs(row[x] - row[i]) == abs(x - i):
-            return False
-    
-    return True
-
-def n_queens(x):
-    global ans
-    if x == n:
-        ans += 1
-        return
-
+def reculsive_fib(n):
+    global reculsive_count
+    if n == 1 or n == 2:
+        reculsive_count += 1
+        return 1
     else:
-        for i in range(n):
-            row[x] = i
-            if is_promising(x):
-                n_queens(x+1)
+        return reculsive_fib(n - 1) + reculsive_fib(n - 2)
 
-n_queens(0)
-print(ans)
+def dynamic_fib(n):
+    dp = [0] * (n + 1)
+    dp[1], dp[2] = 1, 1
+    global dynamic_count
+    for i in range(3, n+1):
+        dynamic_count += 1
+        dp[i] = dp[i - 1] + dp[i - 2]
+
+dynamic_fib(N)
+reculsive_fib(N)
+
+print(reculsive_count, dynamic_count)
 
 # 주석------------
 print("time : ", time.time() - start)
