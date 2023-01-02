@@ -8,30 +8,32 @@ start = time.time()
 #----------------
             
 N = int(input())
+count = 0
+row = [0] * N
 
-reculsive_count = 0
-dynamic_count = 0
+def is_queen_possible(x):
+    for i in range(x):
+        if row[i] == row[x] or abs(x-i) == abs(row[x] - row[i]):
+            return False
 
-def reculsive_fib(n):
-    global reculsive_count
-    if n == 1 or n == 2:
-        reculsive_count += 1
-        return 1
+    return True
+
+def dfs(index):
+    global count
+    if index == N:
+        count += 1
+        return
+
     else:
-        return reculsive_fib(n - 1) + reculsive_fib(n - 2)
+        for i in range(N):
+            row[index] = i
+            if is_queen_possible(index):
+                dfs(index + 1)
 
-def dynamic_fib(n):
-    dp = [0] * (n + 1)
-    dp[1], dp[2] = 1, 1
-    global dynamic_count
-    for i in range(3, n+1):
-        dynamic_count += 1
-        dp[i] = dp[i - 1] + dp[i - 2]
+dfs(0)
 
-dynamic_fib(N)
-reculsive_fib(N)
+print(count)
 
-print(reculsive_count, dynamic_count)
 
 # 주석------------
 print("time : ", time.time() - start)
