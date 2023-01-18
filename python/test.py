@@ -2,23 +2,19 @@ import sys
 import time
 import copy
 
-
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
-r = sys.stdin.readline
-N = int(r())
 
-for _ in range(N):
-    n = int(r())
-    seq = [1,1,1,2,2]
+N = int(sys.stdin.readline())
+arr = list(map(int, sys.stdin.readline().split()))
 
-    for i in range(5, n):
-        seq.append(seq[i - 1] + seq[i - 5])
+for i in range(1, len(arr)):
+    arr[i] = max(arr[i], arr[i-1] + arr[i])
 
-    print(seq[n-1])
+print(max(arr))
 
 # 주석------------
-print("time : ", time.time() - start)
+# print("time : ", time.time() - start)
 # ---------------
