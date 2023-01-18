@@ -7,14 +7,20 @@ import copy
 # start = time.time()
 #----------------
 
+# setup
 N = int(sys.stdin.readline())
-arr = list(map(int, sys.stdin.readline().split()))
+triangle = [list(map(int, sys.stdin.readline().split(" "))) for _ in range(N)]
 
-for i in range(1, len(arr)):
-    arr[i] = max(arr[i], arr[i-1] + arr[i])
+for i in range(1, N):
+    for j in range(i + 1):
+        if j == 0:
+            triangle[i][j] = triangle[i-1][j] + triangle[i][j]
+        elif j == i:
+            triangle[i][j] = triangle[i-1][j-1] + triangle[i][j]
+        else:
+            triangle[i][j] = max(triangle[i-1][j], triangle[i-1][j-1]) + triangle[i][j]
 
-print(max(arr))
-
+print(max(triangle[N-1]))
 # 주석------------
-# print("time : ", time.time() - start)
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
