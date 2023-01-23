@@ -1,26 +1,26 @@
 import sys
 import time
-import copy
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-# setup
-N = int(sys.stdin.readline())
-triangle = [list(map(int, sys.stdin.readline().split(" "))) for _ in range(N)]
+A, B = map(int, sys.stdin.readline().split(" "))
+arr = list(map(int, sys.stdin.readline().split(" ")))
+prefixsum = []
+total = 0
+for i in range(len(arr)):
+    total += arr[i]
+    prefixsum.append(total)
 
-for i in range(1, N):
-    for j in range(i + 1):
-        if j == 0:
-            triangle[i][j] = triangle[i-1][j] + triangle[i][j]
-        elif j == i:
-            triangle[i][j] = triangle[i-1][j-1] + triangle[i][j]
-        else:
-            triangle[i][j] = max(triangle[i-1][j], triangle[i-1][j-1]) + triangle[i][j]
+for _ in range(B):
+    N, M = map(int, sys.stdin.readline().split(" "))
+    if N == 1:
+        print(prefixsum[M - 1])
+    else:
+        print(prefixsum[M - 1] - prefixsum[N - 2])
 
-print(max(triangle[N-1]))
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
