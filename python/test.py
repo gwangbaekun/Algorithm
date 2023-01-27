@@ -6,16 +6,31 @@ import time
 # start = time.time()
 #----------------
 
-A, B = map(int, sys.stdin.readline().split(" "))
+N, M = map(int, sys.stdin.readline().split(" "))
 arr = list(map(int, sys.stdin.readline().split(" ")))
+arr_re = [0 for _ in range(M)]
+count = 0
 
-total = []
-total.append(sum(arr[:B]))
+for i in range(N):
+    if i == 0:
+        arr[0] = arr[0]
+    else:
+        arr[i] = arr[i - 1] + arr[i]
 
-for i in range(A - B):
-    total.append(total[i] - arr[i] + arr[B + i])
+    remain = arr[i] % M
+
+    if remain == 0:
+        count += 1
+
+    arr_re[remain] += 1
+
+for i in range(M):
+    count += arr_re[i] * (arr_re[i] - 1) / 2
+
+print(int(count))
     
-print(max(total))
+    
+
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
 # ---------------
