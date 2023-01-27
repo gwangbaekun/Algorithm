@@ -2,35 +2,32 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
 N, M = map(int, sys.stdin.readline().split(" "))
-arr = list(map(int, sys.stdin.readline().split(" ")))
-arr_re = [0 for _ in range(M)]
-count = 0
+arr = []
+sum_arr = [[0 for _ in range(N + 1)] for _ in range(N + 1)]
 
-for i in range(N):
-    if i == 0:
-        arr[0] = arr[0]
-    else:
-        arr[i] = arr[i - 1] + arr[i]
 
-    remain = arr[i] % M
+for _ in range(N):
+    arr.append(list(map(int, sys.stdin.readline().split(" "))))
 
-    if remain == 0:
-        count += 1
+sum_arr[1][1] = arr[0][0]
 
-    arr_re[remain] += 1
+def procession_sum(arr):
+    for i in range(1, len(arr) + 1):
+        for j in range(1, len(arr) + 1):
+            sum_arr[i][j] = sum_arr[i - 1][j] + sum_arr[i][j - 1] + arr[i - 1][j - 1] - sum_arr[i - 1][j - 1]
+    return sum_arr
 
-for i in range(M):
-    count += arr_re[i] * (arr_re[i] - 1) / 2
+sum_arr = procession_sum(arr)
 
-print(int(count))
-    
-    
+for _ in range(M):
+    x1, y1, x2, y2 = map(int, sys.stdin.readline().split(" "))
+    print(sum_arr[x2][y2] - sum_arr[x2][y1 - 1] - sum_arr[x1 - 1][y2] + sum_arr[x1 - 1][y1 - 1])
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
