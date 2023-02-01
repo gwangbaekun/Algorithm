@@ -1,45 +1,66 @@
 import sys
 import time
-from collections import deque 
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
 N = int(sys.stdin.readline())
-
+arr = []
 for _ in range(N):
-    functions = sys.stdin.readline().strip()
-    n = int(sys.stdin.readline())
-    arr = sys.stdin.readline().strip().strip('][').split(',')
-    q = deque(arr)
+    arr.append(list(map(int, sys.stdin.readline().split(" "))))
 
-    direction = 1
-    count = 0
+blue_count = 0
+white_count = 0
 
-    for elem in functions:
-        if elem == 'R':
-            direction = -direction
-            count += 1
-        elif elem == 'D':
-            if len(q) > 0:
-                if direction == 1:
-                    q.popleft()
-                else:
-                    q.pop()
-    
+def define_array_color(arr):
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            if arr[i][j] == 0:
+                return False
+    return True
 
-    
-    if len(functions) - count > n:
-        print('error')
-    else:
-        if count % 2 == 1:
-            q.reverse()
-            print( '[' + ','.join(q) + ']')
+def define_array(arr):
+    status = arr[0][0]
+    for i in range(len(arr)):
+        for j in range(len(arr)):
+            if arr[i][j] != status:
+                return False
+    return True
+
+def cut(arr):
+    num = int(len(arr)/2)
+    result = [[] for _ in range(4)]
+    for i in range(len(arr)):
+        if i < num:
+            result[0].append(arr[i][0:num])
+            result[1].append(arr[i][num:len(arr)])
         else:
-            print( '[' + ','.join(q) + ']')
+            result[2].append(arr[i][0:num])
+            result[3].append(arr[i][num:len(arr)])
+
+    return result
+
+def reculsive(arr):
+    global blue_count, white_count
+    # first if it is all
+        
+    if define_array(arr):
+        if define_array_color(arr):
+            blue_count += 1
+        else:
+            white_count += 1            
+        return 
+
+    for elem in cut(arr):
+        reculsive(elem)
+
+# reculsive(arr)
+reculsive(arr)
+
+print(white_count,blue_count)
 
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
