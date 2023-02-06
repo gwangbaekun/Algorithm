@@ -2,65 +2,38 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
-arr = []
-for _ in range(N):
-    arr.append(list(map(int, sys.stdin.readline().split(" "))))
+N, K = map(int, sys.stdin.readline().split(" "))
+p = 1000000007
 
-blue_count = 0
-white_count = 0
+# 팩토리얼 값 계산(나머지 연산 적용)
+def factorial(N):
+    n = 1
+    for i in range(2, N+1):
+        n = (n * i) % p
+    return n
 
-def define_array_color(arr):
-    for i in range(len(arr)):
-        for j in range(len(arr)):
-            if arr[i][j] == 0:
-                return False
-    return True
+def square(n, k):
+    if k == 0:
+        return 1
+    elif k == 1:
+        return n
 
-def define_array(arr):
-    status = arr[0][0]
-    for i in range(len(arr)):
-        for j in range(len(arr)):
-            if arr[i][j] != status:
-                return False
-    return True
+    tmp = square(n, k // 2)
 
-def cut(arr):
-    num = int(len(arr)/2)
-    result = [[] for _ in range(4)]
-    for i in range(len(arr)):
-        if i < num:
-            result[0].append(arr[i][0:num])
-            result[1].append(arr[i][num:len(arr)])
-        else:
-            result[2].append(arr[i][0:num])
-            result[3].append(arr[i][num:len(arr)])
+    if k % 2:
+        return tmp * tmp * n % p
+    else:
+        return tmp * tmp % p
 
-    return result
+top = factorial(N)
+bottom = factorial(N - K) * factorial(K) % p
 
-def reculsive(arr):
-    global blue_count, white_count
-    # first if it is all
-        
-    if define_array(arr):
-        if define_array_color(arr):
-            blue_count += 1
-        else:
-            white_count += 1            
-        return 
-
-    for elem in cut(arr):
-        reculsive(elem)
-
-# reculsive(arr)
-reculsive(arr)
-
-print(white_count,blue_count)
+print(top * square(bottom, p-2) % p)
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
