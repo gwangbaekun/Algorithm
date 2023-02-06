@@ -2,8 +2,8 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
 N, K = map(int, sys.stdin.readline().split(" "))
@@ -35,5 +35,5 @@ bottom = factorial(N - K) * factorial(K) % p
 print(top * square(bottom, p-2) % p)
 
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
