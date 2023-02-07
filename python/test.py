@@ -2,38 +2,48 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N, K = map(int, sys.stdin.readline().split(" "))
-p = 1000000007
+N, B = map(int, sys.stdin.readline().split(" "))
+metrix = []
+for _ in range(N):
+    metrix.append(list(map(int, sys.stdin.readline().split(" "))))
 
-# 팩토리얼 값 계산(나머지 연산 적용)
-def factorial(N):
-    n = 1
-    for i in range(2, N+1):
-        n = (n * i) % p
-    return n
+def multiply(metrix_a, metrix_b):
+    global N
+    arr = [[0 for _ in range(N)] for _ in range(N)]
+    for i in range(N):
+        for j in range(N):
+            for k in range(N):
+                arr[i][j] += metrix_a[i][k] * metrix_b[k][j]
 
-def square(n, k):
-    if k == 0:
-        return 1
-    elif k == 1:
-        return n
+    for i in range(N):
+        for j in range(N):
+            arr[i][j] = arr[i][j] % 1000
 
-    tmp = square(n, k // 2)
+    return arr
 
-    if k % 2:
-        return tmp * tmp * n % p
+def reculsive(A, b):
+    global metrix
+    if b == 1:
+        for i in range(N):
+            for j in range(N):
+                A[i][j] = A[i][j] % 1000
+        return A
+    
+    tmp = reculsive(A, b//2)
+    if b % 2:
+        return multiply(multiply(tmp, tmp), A)
     else:
-        return tmp * tmp % p
+        return multiply(tmp, tmp)
+    
+result = reculsive(metrix, B)
 
-top = factorial(N)
-bottom = factorial(N - K) * factorial(K) % p
-
-print(top * square(bottom, p-2) % p)
-
+for elem in result:
+    print(*elem)
+    
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
