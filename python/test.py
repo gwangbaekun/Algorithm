@@ -7,28 +7,23 @@ import time
 #----------------
 
 N, K = map(int, sys.stdin.readline().split(" "))
-arr = [int(sys.stdin.readline()) for _ in range(N)]
-
+arr = list(map(int, sys.stdin.readline().split(" ")))
 
 start, end = 1, max(arr)
-count = 0
 
-while 2 ** count < max(arr):
-    count += 1
-
-for i in range(count):
+while start <= end:
     mid = (start + end) // 2
-    c = 0
+    lo = 0
     for elem in arr:
-        c += elem // mid
-    
-    if c >= K:
+        if elem - mid > 0:
+            lo += elem - mid
+
+    if lo >= K:
         start = mid + 1
     else:
         end = mid - 1
 
 print(end)
-
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
 # ---------------
