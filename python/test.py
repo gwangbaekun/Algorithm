@@ -2,48 +2,33 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
-N, B = map(int, sys.stdin.readline().split(" "))
-metrix = []
-for _ in range(N):
-    metrix.append(list(map(int, sys.stdin.readline().split(" "))))
+N, K = map(int, sys.stdin.readline().split(" "))
+arr = [int(sys.stdin.readline()) for _ in range(N)]
 
-def multiply(metrix_a, metrix_b):
-    global N
-    arr = [[0 for _ in range(N)] for _ in range(N)]
-    for i in range(N):
-        for j in range(N):
-            for k in range(N):
-                arr[i][j] += metrix_a[i][k] * metrix_b[k][j]
 
-    for i in range(N):
-        for j in range(N):
-            arr[i][j] = arr[i][j] % 1000
+start, end = 1, max(arr)
+count = 0
 
-    return arr
+while 2 ** count < max(arr):
+    count += 1
 
-def reculsive(A, b):
-    global metrix
-    if b == 1:
-        for i in range(N):
-            for j in range(N):
-                A[i][j] = A[i][j] % 1000
-        return A
+for i in range(count):
+    mid = (start + end) // 2
+    c = 0
+    for elem in arr:
+        c += elem // mid
     
-    tmp = reculsive(A, b//2)
-    if b % 2:
-        return multiply(multiply(tmp, tmp), A)
+    if c >= K:
+        start = mid + 1
     else:
-        return multiply(tmp, tmp)
-    
-result = reculsive(metrix, B)
+        end = mid - 1
 
-for elem in result:
-    print(*elem)
-    
+print(end)
+
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
