@@ -6,30 +6,24 @@ sys.stdin = open('python.txt', 'r')
 start = time.time()
 #----------------
 
-N, C = map(int, sys.stdin.readline().split(" "))
-arr = [int(sys.stdin.readline()) for _ in range(N)]
+str = sys.stdin.readline().strip()
+bomb = sys.stdin.readline().strip()
 
-arr.sort()
-start = 1
-end = arr[-1] - arr[0]
+len_bomb = len(bomb)
+stack = []
+previous = ''
 
-while start <= end:
-    mid = (start + end) // 2
-    cur = arr[0]
-    count = 1
+for char in str:
+    stack.append(char)
+ 
+    if "".join(stack[-len_bomb:]) == bomb:
+        for _ in range(len_bomb):
+            stack.pop()
 
-    for i in range(1, len(arr)):
-        if arr[i] >= cur + mid:
-            count += 1
-            cur = arr[i]
-
-    if count >= C:
-        start = mid + 1
-        answer = mid
-    else:
-        end = mid - 1
-
-print(answer)
+if len(stack) == 0:
+    print("FRULA")
+else:
+    print("".join(stack))
 
 # 주석------------
 print(f"time : {time.time() - start:.5f} sec")
