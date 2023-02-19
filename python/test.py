@@ -2,29 +2,25 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
-str = sys.stdin.readline().strip()
-bomb = sys.stdin.readline().strip()
+N, L = map(int, sys.stdin.readline().split(" "))
+al = list(map(int, sys.stdin.readline().split(" ")))
 
-len_bomb = len(bomb)
-stack = []
-previous = ''
+al_blood = 0
+count = 0
+for i in range(len(al)):
+    if i >= L:
+        al_blood += al[i] - al[i - L]
+    else:
+        al_blood += al[i]
 
-for char in str:
-    stack.append(char)
- 
-    if "".join(stack[-len_bomb:]) == bomb:
-        for _ in range(len_bomb):
-            stack.pop()
+    if al_blood >= 129 and al_blood<= 138:
+        count += 1
 
-if len(stack) == 0:
-    print("FRULA")
-else:
-    print("".join(stack))
-
+print(count)
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
