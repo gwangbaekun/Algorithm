@@ -1,26 +1,43 @@
 import sys
 import time
+from collections import deque
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('python.txt', 'r')
+start = time.time()
 #----------------
 
-N, L = map(int, sys.stdin.readline().split(" "))
-al = list(map(int, sys.stdin.readline().split(" ")))
+N = int(sys.stdin.readline())
+actions = []
+answer = deque([])
 
-al_blood = 0
-count = 0
-for i in range(len(al)):
-    if i >= L:
-        al_blood += al[i] - al[i - L]
+for _ in range(N):
+    action = list(sys.stdin.readline().split(" "))
+    actions.append(action)
+
+status = []
+
+for action in actions:
+    if action[0] == '1':
+        answer.append(action[1].strip())
+        status.append('1')
+    elif action[0] == '2':
+        answer.appendleft(action[1].strip())
+        status.append('2')
     else:
-        al_blood += al[i]
+        if len(status) != 0:
+            if status[-1] == '1':
+                answer.pop()
+                status.pop()
+            elif status[-1] == '2':
+                answer.popleft()
+                status.pop()
 
-    if al_blood >= 129 and al_blood<= 138:
-        count += 1
+if len(answer) == 0:
+    print(0)
+else:
+    print(''.join(answer))
 
-print(count)
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
