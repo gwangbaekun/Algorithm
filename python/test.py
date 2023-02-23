@@ -3,41 +3,38 @@ import time
 from collections import deque
 
 # 주석------------
-sys.stdin = open('python.txt', 'r')
-start = time.time()
+# sys.stdin = open('python.txt', 'r')
+# start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
-actions = []
-answer = deque([])
-
+N, C = map(int, sys.stdin.readline().split(" "))
+arr = []
 for _ in range(N):
-    action = list(sys.stdin.readline().split(" "))
-    actions.append(action)
+    arr.append(int(sys.stdin.readline()))
 
-status = []
+arr.sort()
+start = 1
+end = arr[N - 1] - arr[0]
+answer = 0
 
-for action in actions:
-    if action[0] == '1':
-        answer.append(action[1].strip())
-        status.append('1')
-    elif action[0] == '2':
-        answer.appendleft(action[1].strip())
-        status.append('2')
+while start <= end:
+    mid = (start + end) // 2
+    cur = arr[0]
+    count = 1
+
+    for i in range(1, N):
+        if arr[i] >= cur + mid:
+            count += 1
+            cur = arr[i]
+    
+    if count >= C:
+        start = mid + 1
+        answer = mid
     else:
-        if len(status) != 0:
-            if status[-1] == '1':
-                answer.pop()
-                status.pop()
-            elif status[-1] == '2':
-                answer.popleft()
-                status.pop()
+        end = mid - 1
 
-if len(answer) == 0:
-    print(0)
-else:
-    print(''.join(answer))
+print(answer)
 
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
