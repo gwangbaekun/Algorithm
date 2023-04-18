@@ -3,32 +3,46 @@ import time
 from collections import deque
 
 # 주석------------
-# sys.stdin = open('python.txt', 'r')
-# start = time.time()
+sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
-k = int(sys.stdin.readline())
+while True:
+    recs = list(map(int, sys.stdin.readline().split(" ")))
+    lenInput = recs[0]
+    recs = recs[1:]
+    if lenInput == 0:
+        break
 
-start = 1
-end = k
-answer = 0
+    stack = deque()
+    area = 0
 
-while start <= end:
-    mid = (start + end) // 2
-    count = 0
+    for i in range(lenInput):
+        while len(stack) != 0 and recs[stack[-1]] > recs[i]:
+            tmp = stack.pop()
+            
+            if len(stack) == 0:
+                width = i
+            else:
+                width = i - stack[-1] - 1
+            
+            area = max(area, width * recs[tmp])
 
-    for i in range(1, N+1):
-        count += min(mid // i, N)
+        stack.append(i)
 
-    if count >= k:
-        end = mid - 1
-        answer = mid
-    else:
-        start = mid + 1
+    while len(stack) != 0:
+        tmp = stack.pop()
 
-print(answer)
+        if len(stack) == 0:
+            width = lenInput
+        else:
+            width = lenInput - stack[-1] - 1
+
+        area = max(area, width * recs[tmp])
+
+    print(area)
+            
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
