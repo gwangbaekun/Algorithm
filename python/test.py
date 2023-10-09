@@ -6,11 +6,13 @@ import time
 # start = time.time()
 #----------------
 
-pieces = [1, 1, 2, 2, 2, 8]
-h = sys.stdin.readline().split(" ")
+h = int(sys.stdin.readline())
 
-for i in range(0, len(h)):
-    print(pieces[i] - int(h[i]), end=" ")
+for i in range(1, h + 1):
+    print(' ' * (h - i) + '*' * (2 * i - 1))
+
+for i in range(h - 1, 0, -1):
+    print(' ' * (h - i) + '*' * (2 * i - 1))
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
