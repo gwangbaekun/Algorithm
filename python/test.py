@@ -2,29 +2,24 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-# start = time.time()
+sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+start = time.time()
 #----------------
 
-N, M = map(int, sys.stdin.readline().split())
+maxNum = 0
+row, column = 1, 1
 
-A = []
-B = []
+for i in range(9):
+    nums = list(map(int, sys.stdin.readline().split()))
+    if maxNum < max(nums):
+        column = nums.index(max(nums)) + 1
+        row =  i + 1
+        maxNum = max(nums)
 
-for _ in range(N):
-    A.append(list(map(int, sys.stdin.readline().split(" "))))
-
-for i in range(N):
-    B.append(list(map(int, sys.stdin.readline().split(" "))))
-
-for i in range(N):
-    for j in range(M):
-        A[i][j] += B[i][j]
-
-for i in range(N):
-    print(*A[i])
+print(maxNum)
+print(row, column)
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
 
