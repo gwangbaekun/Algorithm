@@ -2,23 +2,23 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-# start = time.time()
+sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+start = time.time()
 #----------------
 
-coordinates = [[0 for _ in range(100)] for _ in range(100)]
+N, M = map(int, sys.stdin.readline().split())
+cards = list(map(int,sys.stdin.readline().split()))
+result = 0
+for i in range(N):
+    for j in range(i + 1, N):
+        for k in range(j + 1, N):
+            sum = cards[i] + cards[j] + cards[k]
+            if sum <= M:
+                result = max(result, sum)
 
-N = int(sys.stdin.readline())
-papers = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
-
-for paper in papers:
-    for i in range(paper[0], paper[0]+10):
-        for j in range(paper[1], paper[1]+10):
-            coordinates[i][j] = 1
-
-print(sum(sum(coordinates, [])))
+print(result)
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
 
