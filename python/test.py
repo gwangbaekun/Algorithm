@@ -6,20 +6,16 @@ sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
 start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+a,b,c,d,e,f = map(int, sys.stdin.readline().split())
 
-def get_number_sum(n):
-    sum = 0
-    for i in range(len(str(n))):
-        sum += int(str(n)[i])
-    return sum + n
+if (a * e - d * b) == 0 or (b * d - e * a) == 0:
+    x = (a + b) // c
+    y = (a + b) // c
+else:
+    y = (c * d - f * a) // (b * d - e * a)
+    x = (c * e - f * b) // (a * e - d * b)
 
-for i in range(N):
-    if get_number_sum(i) == N:
-        print(i)
-        break
-    if i == N-1:
-        print(0)
+print(x, y)
 
 
 # 주석------------
