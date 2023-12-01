@@ -2,24 +2,16 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-start = time.time()
+# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+# start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+nums = [int(sys.stdin.readline()) for _ in range(5)]
 
-dume = []
-num = 0
+nums.sort()
 
-while len(dume) < N:
-    if '666' in str(num):
-        dume.append(num)
-        num += 1
-    else:
-        num += 1
-
-print(dume[-1])
+print(sum(nums)//5, nums[2], sep='\n')
 
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
