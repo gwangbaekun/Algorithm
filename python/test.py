@@ -6,24 +6,28 @@ import time
 # start = time.time()
 #----------------
 
-N, M = map(int, sys.stdin.readline().split())
+A, B = map(int, sys.stdin.readline().split())
+C, D = map(int, sys.stdin.readline().split())
 
 def gcd(a, b):
     if a < b:
-        a, b = a, b
+        a, b = b, a
     if b == 0:
         return a
-    if a % b == 0:
-        return b
-    else:
-        return gcd(b, a % b)
-    
+    return gcd(b, a%b)
+
 def lcm(a, b):
     return a * b // gcd(a, b)
 
-print(lcm(N, M))
+def solution(a, b, c, d):
+    lcmNum = lcm(b, d)
+    a = a * (lcmNum // b)
+    c = c * (lcmNum // d)
+    return a + c, lcmNum
 
+top, bottom = solution(A, B, C, D)
 
+print(top // gcd(top,bottom), bottom // gcd(top,bottom))
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
