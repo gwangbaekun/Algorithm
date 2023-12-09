@@ -1,29 +1,28 @@
 import sys
 import time
-from math import gcd
 
 # 주석------------
-sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-start = time.time()
+# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+# start = time.time()
 #----------------
 
 N = int(sys.stdin.readline())
 
-a = int(sys.stdin.readline())    
-arr = []
-for _ in range(1, N):
-    num = int(sys.stdin.readline())
-    arr.append(num - a)
-    a = num
-        
-g = arr[0]
-for i in range(1, len(arr)):
-    g = gcd(g, arr[i])
-
-result = 0
-for each in arr:
-    result += each // g - 1
-
+def isPrime(n):
+    if n == 0:
+        return False
+    if n == 1:
+        return False
+    for i in range(2, int(n **0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+     
+for _ in range(N):
+    n = int(sys.stdin.readline())
+    while not isPrime(n):
+        n += 1
+    print(n)
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
