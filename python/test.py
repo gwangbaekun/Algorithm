@@ -6,53 +6,36 @@ import time
 # start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
+def checkClose(stack):
+    if len(stack) == 0 or len(stack) == 1:
+        return stack
+    if stack[len(stack) - 1] == ')' and stack[len(stack) - 2] == '(':
+        stack.pop()
+        stack.pop()
+    elif stack[len(stack) - 1] == ']' and stack[len(stack) - 2] == '[':
+        stack.pop()
+        stack.pop()
+    return stack
 
-class stack:
-    def __init__(self):
-        self.stack = []
-        self.size = 0
+while True:
+    try:
+        testString = sys.stdin.readline().rstrip()
 
-    def push(self, num):
-        self.stack.append(num)
-        self.size += 1
+        if (testString == '.'):
+            break
 
-    def pop(self):
-        if self.size == 0:
-            return -1
-        else:
-            self.size -= 1
-            return self.stack.pop()
-    
-    def size(self):
-        return self.size
-
-    def empty(self):
-        if self.size == 0:
-            return 1
-        else:
-            return 0
-    
-    def top(self):
-        if self.size == 0:
-            return -1
-        else:
-            return self.stack[-1]
-        
-stack = stack()
-
-for _ in range(N):
-    command = sys.stdin.readline().split()
-    if command[0] == '1':
-        stack.push(int(command[1]))
-    elif command[0] == '2':
-        print(stack.pop())
-    elif command[0] == '3':
-        print(stack.size)
-    elif command[0] == '4':
-        print(stack.empty())
-    elif command[0] == '5':
-        print(stack.top())
+        if (testString[len(testString) - 1] == '.'):
+            stack = []
+            for i in range(len(testString) - 1):
+                if (testString[i] == '(' or testString[i] == '[' or testString[i] == ')' or testString[i] == ']'): 
+                    stack.append(testString[i])
+                    stack = checkClose(stack)
+            if len(stack) == 0:
+                print('yes')
+            else:
+                print('no')
+    except:
+        break
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
