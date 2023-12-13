@@ -2,41 +2,34 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-# start = time.time()
+sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+start = time.time()
 #----------------
 
-def checkClose(stack):
-    if len(stack) == 0 or len(stack) == 1:
-        return stack
-    if stack[len(stack) - 1] == ')' and stack[len(stack) - 2] == '(':
-        stack.pop()
-        stack.pop()
-    elif stack[len(stack) - 1] == ']' and stack[len(stack) - 2] == '[':
-        stack.pop()
-        stack.pop()
-    return stack
+N = int(sys.stdin.readline())
+l = list(map(int, sys.stdin.readline().split()))
+stack = []
+cnt = 1
 
-while True:
-    try:
-        testString = sys.stdin.readline().rstrip()
+while l:
+    if cnt == l[0]:
+        l.pop(0)
+        cnt += 1
+    else:
+        stack.append(l.pop(0))
 
-        if (testString == '.'):
+    while stack:
+        if stack[-1] == cnt:
+            stack.pop()
+            cnt += 1
+        else:
             break
 
-        if (testString[len(testString) - 1] == '.'):
-            stack = []
-            for i in range(len(testString) - 1):
-                if (testString[i] == '(' or testString[i] == '[' or testString[i] == ')' or testString[i] == ']'): 
-                    stack.append(testString[i])
-                    stack = checkClose(stack)
-            if len(stack) == 0:
-                print('yes')
-            else:
-                print('no')
-    except:
-        break
+if len(stack) == 0:
+    print("Nice")
+else:
+    print("Sad")
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
