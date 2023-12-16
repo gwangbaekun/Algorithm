@@ -7,17 +7,19 @@ sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
 start = time.time()
 #----------------
 
-N = int(sys.stdin.readline())
-
 q = deque()
+l = []
+N, K = map(int, sys.stdin.readline().split())
+
 for i in range(N):
     q.append(i + 1)
 
-while len(q) > 1:
-    q.popleft()
-    q.append(q.popleft())
+while len(l) != N:
+    for i in range(K - 1):
+        q.append(q.popleft())
+    l.append(q.popleft())
 
-print(q[0])
+print('<' + ', '.join(str(x) for x in l) + '>')
 
 # 주석------------
 print(f"time : {time.time() - start:.5f} sec")
