@@ -8,19 +8,14 @@ start = time.time()
 #----------------
 
 N = int(sys.stdin.readline())
-A = list(map(int, sys.stdin.readline().split()))
-B = list(map(int, sys.stdin.readline().split()))
-M = int(sys.stdin.readline())
-C = list(map(int, sys.stdin.readline().split()))
+answer = 1
 
-queue = deque()
-for i in range(N):
-    if A[i] == 0:
-        queue.appendleft(B[i])
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
 
-for i in range(M):
-    queue.append(C[i])
-    print(queue.popleft(), end=" ")
+print(factorial(N))
 
 # 주석------------
 print(f"time : {time.time() - start:.5f} sec")
