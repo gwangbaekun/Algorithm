@@ -3,46 +3,29 @@ import time
 from collections import deque
 
 # 주석------------
-sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-start = time.time()
+# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+# start = time.time()
 #----------------
 
-def merge_sort(arr):
-    if len(arr) <= 1 :
-        return arr
-    mid = (len(arr)+1)//2
-    low_arr = merge_sort(arr[:mid])
-    high_arr = merge_sort(arr[mid:])
-    
-    sorted_arr= []
-    l=h=0
-    while l < len(low_arr) and h < len(high_arr):
-        if low_arr[l] <= high_arr[h] :
-            sorted_arr.append(low_arr[l])
-            ans.append(low_arr[l])
-            l += 1
-        else :
-            sorted_arr.append(high_arr[h])
-            ans.append(high_arr[h])
-            h += 1
-            
-    while l < len(low_arr) :
-        sorted_arr.append(low_arr[l])
-        ans.append(low_arr[l])
-        l += 1
-    
-    while h < len(high_arr):
-        sorted_arr.append(high_arr[h])
-        ans.append(high_arr[h])
-        h +=1
-        
-    return sorted_arr
+def kantor(strL, count):
+    _strL = []
+    if count == 0:
+        return "".join(strL)
+    else:
+        for str in strL:
+            onethird = 3 ** (count) // 3
+            _strL.append(str[:onethird])
+            _strL.append(" " * (3 ** (count - 1)))
+            _strL.append(str[:onethird])
+        return kantor(_strL, count - 1)
 
-ans = []
-N,K = map(int,input().split())
-merge_sort(list(map(int,input().split())))
-print(ans[K-1] if K <= len(ans) else -1)
-    
+while True:
+    try:
+        N = int(sys.stdin.readline())
+        print(kantor(["-"* (3 ** (N))], N))
+    except:
+        break
+
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
