@@ -3,29 +3,30 @@ import time
 from collections import deque
 
 # 주석------------
-# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-# start = time.time()
+sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+start = time.time()
 #----------------
 
-def kantor(strL, count):
-    _strL = []
-    if count == 0:
-        return "".join(strL)
-    else:
-        for str in strL:
-            onethird = 3 ** (count) // 3
-            _strL.append(str[:onethird])
-            _strL.append(" " * (3 ** (count - 1)))
-            _strL.append(str[:onethird])
-        return kantor(_strL, count - 1)
+def func(n):
+    if n == 1:
+        return ['*']
+    
+    Stars = func(n // 3)
+    l = []
+    
+    for star in Stars:
+        l.append(star * 3)
+    for star in Stars:
+        l.append(star + ' ' * (n // 3) + star)
+    for star in Stars:
+        l.append(star * 3)
 
-while True:
-    try:
-        N = int(sys.stdin.readline())
-        print(kantor(["-"* (3 ** (N))], N))
-    except:
-        break
+    return l
+
+N = int(sys.stdin.readline())
+
+print('\n'.join(func(N)))
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
