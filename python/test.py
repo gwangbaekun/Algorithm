@@ -3,9 +3,9 @@ import time
 from collections import deque
 
 # 주석------------
-sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-start = time.time()
-input = sys.stdin.readline
+# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+# start = time.time()
+# input = sys.stdin.readline
 #----------------
 
 max_val = -1e9 - 1
@@ -38,5 +38,5 @@ cal(1, nums[0], plus, minus, multi, div)
 print(int(max_val), int(min_val), sep='\n')
 
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
