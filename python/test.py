@@ -3,40 +3,39 @@ import time
 from collections import deque
 
 # 주석------------
-# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-# start = time.time()
-# input = sys.stdin.readline
+sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+start = time.time()
+input = sys.stdin.readline
 #----------------
 
-max_val = -1e9 - 1
-min_val = 1e9 + 1
-
-def cal(depth, result, plus, minus, multi, div):
-    global N, max_val, min_val
-    if depth == N:
-        max_val = max(max_val, result)
-        min_val = min(min_val, result)
+def dfs(depth, curIdx):
+    global res
+    if depth == N // 2:
+        A = 0
+        B = 0
+        for i in range(N):
+            for j in range(N):
+                if visited[i] and visited[j]:
+                    A += board[i][j]
+                elif not visited[i] and not visited[j]:
+                    B += board[i][j]
+        res = min(res, abs(A - B))
         return
-    
-    if plus:
-        cal(depth+1, result+nums[depth], plus-1, minus, multi, div)
-    if minus:
-        cal(depth+1, result-nums[depth], plus, minus-1, multi, div)
-    if multi:
-        cal(depth+1, result*nums[depth], plus, minus, multi-1, div)
-    if div:
-        if result < 0:
-            cal(depth+1, -(-result//nums[depth]), plus, minus, multi, div-1)
-        else:
-            cal(depth+1, result//nums[depth], plus, minus, multi, div-1)
+    for i in range(curIdx, N):
+        if not visited[i]:
+            visited[i] = 1
+            dfs(depth + 1, curIdx + 1)
+            visited[i] = 0
 
-N = int(sys.stdin.readline())
-nums = list(map(int, sys.stdin.readline().split()))
-plus, minus, multi, div = map(int, sys.stdin.readline().split())
+N = int(input())
+board = [list(map(int, input().split())) for _ in range(N)]
+visited = [0 for _ in range(N)]
+INF = 2147000000
+res = INF
 
-cal(1, nums[0], plus, minus, multi, div)
-print(int(max_val), int(min_val), sep='\n')
+dfs(0, 0)
+print(res)
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
