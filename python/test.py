@@ -5,7 +5,7 @@ from collections import deque
 # 주석------------
 sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
 start = time.time()
-input = sys.stdin.readline
+# input = sys.stdin.readline
 #----------------
 
 def dfs(depth, curIdx):
@@ -27,8 +27,8 @@ def dfs(depth, curIdx):
             dfs(depth + 1, curIdx + 1)
             visited[i] = 0
 
-N = int(input())
-board = [list(map(int, input().split())) for _ in range(N)]
+N = int(sys.stdin.readline())
+board = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
 visited = [0 for _ in range(N)]
 INF = 2147000000
 res = INF
