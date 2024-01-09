@@ -1,24 +1,25 @@
 import sys
 import time
-from collections import deque
 
 # 주석------------
-sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
-start = time.time()
+# sys.stdin = open('/Users/home/Developer/study/Algorithm/python/python.txt', 'r')
+# start = time.time()
+#----------------
 input = sys.stdin.readline
 #----------------
 
 N = int(input())
-A = [list(map(int, input().split()) ) for _ in range(N)]
-a = A
+dp = [0] * (N+1)
 
-for i in range(1, N):
-    a[i][0] = min(A[i-1][1], A[i-1][2]) + A[i][0]
-    a[i][1] = min(A[i-1][0], A[i-1][2]) + A[i][1]
-    a[i][2] = min(A[i-1][0], A[i-1][1]) + A[i][2]
+for i in range(2, N+1):
+    dp[i] = dp[i-1] + 1
+    if i % 3 == 0:
+        dp[i] = min(dp[i], dp[i//3] + 1)
+    if i % 2 == 0:
+        dp[i] = min(dp[i], dp[i//2] + 1)
 
-print(min(a[N - 1]))    
+print(dp[N])
 
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
