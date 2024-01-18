@@ -2,8 +2,8 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt', 'r')
-start = time.time()
+# sys.stdin = open('/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt', 'r')
+# start = time.time()
 #----------------
 input = sys.stdin.readline
 #----------------
@@ -29,5 +29,5 @@ for i in range(2, N+1):
 print(sum(dp[N]) % MOD)
 
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
