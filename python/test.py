@@ -8,21 +8,18 @@ start = time.time()
 input = sys.stdin.readline
 #----------------
 
-n, m = map(int, input().split())
+N = int(input())
+arr = list(int(input()) for _ in range(N))
+dp = [[0,0,0] for _ in range(N)]
 
-dict = {}
+dp[0] = [arr[0], 0, 0]
 
-for i in range(1, n + 1):
-    a = input().rstrip()
-    dict[i] = a
-    dict[a] = i
+for i in range(1, N):
+    dp[i][0] = dp[i-1][2] + arr[i]
+    dp[i][1] = dp[i-1][0] + arr[i]
+    dp[i][2] = max(dp[i-1][0], dp[i-1][1], dp[i-1][2])
 
-for i in range(m):
-    quest = input().rstrip()
-    if quest.isdigit():
-        print(dict[int(quest)])
-    else:
-        print(dict[quest])
+print(max(dp[-1]))
 
 # 주석------------
 print(f"time : {time.time() - start:.5f} sec")
