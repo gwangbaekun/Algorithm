@@ -8,17 +8,20 @@ import time
 input = sys.stdin.readline
 #----------------
 
-char, char2 = input().strip(), input().strip()
-l1, l2 = len(char), len(char2)
-results = [[0] * (l2 + 1) for _ in range(l1 + 1)]
-for i in range(1, l1 + 1):
-    for j in range(1, l2 + 1):          
-        if char[i-1] == char2[j-1]:
-            results[i][j] = results[i-1][j-1] + 1
-        else:
-            results[i][j] = max(results[i-1][j], results[i][j-1])
+N, K = map(int, input().split())
+stuffs = [list(map(int, input().split())) for _ in range(N)]
 
-print(results[-1][-1])
+cache = [[0] * (K + 1) for _ in range(N + 1)]
+
+for i in range(1, N + 1):
+    for j in range(0, K + 1):
+        w, v = stuffs[i - 1]
+        if w <= j:
+            cache[i][j] = max(v + cache[i - 1][j - w], cache[i-1][j])
+        else:
+            cache[i][j] = cache[i-1][j]
+
+print(cache[-1][-1])
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
