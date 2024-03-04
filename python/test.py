@@ -8,20 +8,16 @@ import time
 input = sys.stdin.readline
 #----------------
 
-N, K = map(int, input().split())
-stuffs = [list(map(int, input().split())) for _ in range(N)]
+N, M = map(int, input().split())
+arr = list(map(int, input().split()))
 
-cache = [[0] * (K + 1) for _ in range(N + 1)]
-
+sumArr = [0] * (N+1)
 for i in range(1, N + 1):
-    for j in range(0, K + 1):
-        w, v = stuffs[i - 1]
-        if w <= j:
-            cache[i][j] = max(v + cache[i - 1][j - w], cache[i-1][j])
-        else:
-            cache[i][j] = cache[i-1][j]
+    sumArr[i] = sumArr[i-1] + arr[i - 1]
 
-print(cache[-1][-1])
+for _ in range(M):
+    i, j = map(int, input().split())
+    print(sumArr[j] - sumArr[i-1])
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
