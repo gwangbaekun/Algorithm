@@ -2,23 +2,27 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt', 'r')
-# start = time.time()
+sys.stdin = open('/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt', 'r')
+start = time.time()
 #----------------
 input = sys.stdin.readline
 #----------------
 
-N, M = map(int, input().split())
-arr = list(map(int, input().split()))
+N, K = map(int, input().strip().split())
+c_t = [int(input()) for _ in range(N)]
 
-sumArr = [0] * (N+1)
-for i in range(1, N + 1):
-    sumArr[i] = sumArr[i-1] + arr[i - 1]
+c_t.sort(reverse=True)
 
-for _ in range(M):
-    i, j = map(int, input().split())
-    print(sumArr[j] - sumArr[i-1])
+c_c = 0
 
+for i in range(N):
+    if K == 0:
+        break
+    if K >= c_t[i]:
+        c_c += K // c_t[i]
+        K = K % c_t[i] 
+
+print(c_c)  
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
