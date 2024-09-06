@@ -8,21 +8,22 @@ start = time.time()
 input = sys.stdin.readline
 #----------------
 
-N, K = map(int, input().strip().split())
-c_t = [int(input()) for _ in range(N)]
+N = int(input())
+chat_user = set()
+cnt = 0
+for _ in range(N):
+    word = input().strip()
+    
+    if word == 'ENTER':
+        cnt += len(chat_user)
+        chat_user.clear()
+    else:
+        chat_user.add(word)
 
-c_t.sort(reverse=True)
+cnt += len(chat_user)
 
-c_c = 0
+print(cnt)
 
-for i in range(N):
-    if K == 0:
-        break
-    if K >= c_t[i]:
-        c_c += K // c_t[i]
-        K = K % c_t[i] 
-
-print(c_c)  
 # 주석------------
 print(f"time : {time.time() - start:.5f} sec")
 # ---------------
