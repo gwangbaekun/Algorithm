@@ -8,21 +8,29 @@ start = time.time()
 input = sys.stdin.readline
 #----------------
 
-N = int(input())
-chat_user = set()
-cnt = 0
-for _ in range(N):
-    word = input().strip()
+N, M = map(int, input().split())
+r = []
+visited = [False] * N
+
+def dfs():
+    if len(r) == M:
+        print(' '.join(map(str, r)))
+        return
     
-    if word == 'ENTER':
-        cnt += len(chat_user)
-        chat_user.clear()
-    else:
-        chat_user.add(word)
+    for i in range(N):
+        if visited[i]:
+            continue
 
-cnt += len(chat_user)
+        visited[i] = True
+        r.append(i + 1)
+        dfs()
+        r.pop()
+        print(r)
+        print(visited)
+        visited[i] = False
 
-print(cnt)
+dfs()
+
 
 # 주석------------
 print(f"time : {time.time() - start:.5f} sec")
