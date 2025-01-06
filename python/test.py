@@ -8,20 +8,16 @@ start = time.time()
 input = sys.stdin.readline
 #----------------
 
-X = int(input())
 N = int(input())
 
-sum = 0
+s = ""
 
-for _ in range(N):
-    a, b = map(int, input().split())
-    sum += a * b
- 
-if sum == X:
-    print("Yes")
-else:
-    print("No")
+for _ in range(int(N / 4)):
+    s += "long "
 
+s += "int"
+
+print(s)
 # 주석------------
 print(f"time : {time.time() - start:.5f} sec")
 # ---------------
