@@ -2,22 +2,27 @@ import sys
 import time
 
 # 주석------------
-sys.stdin = open('/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt', 'r')
-start = time.time()
+# sys.stdin = open('/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt', 'r')
+# start = time.time()
 #----------------
 input = sys.stdin.readline
 #----------------
 
 N = int(input())
 
-s = ""
+dancing = {"ChongChong"}
 
-for _ in range(int(N / 4)):
-    s += "long "
+for i in range(N):
+    a, b = input().rstrip().split(" ")
 
-s += "int"
+    if a in dancing:
+        dancing.add(b)
 
-print(s)
+    if b in dancing:
+        dancing.add(a)
+
+print(len(dancing))
+
 # 주석------------
-print(f"time : {time.time() - start:.5f} sec")
+# print(f"time : {time.time() - start:.5f} sec")
 # ---------------
