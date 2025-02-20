@@ -2,24 +2,28 @@ import sys
 import time
 
 # 주석------------
-# sys.stdin = open('/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt', 'r')
-# start = time.time()
-#----------------
+sys.stdin = open("/Users/jeyeolbaek/Developer/study/Algorithm/python/python.txt", "r")
+start = time.time()
+# ----------------
 input = sys.stdin.readline
-#----------------
+# ----------------
 
 N = int(input())
-A = set(map(int, input().split(" ")))
-M = int(input())
-a = list(map(int, input().split(" ")))
+meetings = [list(map(int, sys.stdin.readline().split())) for _ in range(N)]
 
-for i in range(M):
-    if a[i] in A:
-        print(1)
-    else:
-        print(0)
+meetings.sort(key=lambda x: (x[1], x[0]))
+
+count = 0
+end_time = 0
+
+for start, end in meetings:
+    if start >= end_time:
+        count += 1
+        end_time = end
+
+print(count)
 
 
 # 주석------------
-# print(f"time : {time.time() - start:.5f} sec")
+print(f"time : {time.time() - start:.5f} sec")
 # ---------------
