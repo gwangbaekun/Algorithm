@@ -8,18 +8,18 @@ import time
 input = sys.stdin.readline
 # ----------------
 
-expression = input()
+N = int(input())
+dis = list(map(int, input().split(" ")))
+gases = list(map(int, input().split(" ")))
 
-subtraction_groups = expression.split("-")
+min_price = gases[0]
+sum_gas_price = 0
 
-total = sum(map(int, subtraction_groups[0].split("+")))
+for i in range(N - 1):
+    min_price = min(gases[i], min_price)
+    sum_gas_price += min_price * dis[i]
 
-
-for group in subtraction_groups[1:]:
-    total -= sum(map(int, group.split("+")))
-
-print(total)
-
+print(sum_gas_price)
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
