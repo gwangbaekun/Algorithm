@@ -8,15 +8,19 @@ import time
 input = sys.stdin.readline
 # ----------------
 
-N = int(input())
-t = list(map(int, input().split(" ")))
-t.sort()
+expression = input()
 
-for i in range(N):
-    if i > 0:
-        t[i] = t[i] + t[i - 1]
+subtraction_groups = expression.split("-")
 
-print(sum(t))
+total = sum(map(int, subtraction_groups[0].split("+")))
+
+
+for group in subtraction_groups[1:]:
+    total -= sum(map(int, group.split("+")))
+
+print(total)
+
+
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
 # ---------------
