@@ -6,32 +6,39 @@ import time
 # start = time.time()
 # ----------------
 input = sys.stdin.readline
+sys.setrecursionlimit(300000)
 # ----------------
 
-
-def min_merge_cost_dp(K, l):
-    dp = [[0 for i in range(K)] for j in range(K)]
-
-    for length in range(2, K + 1):
-        for i in range(K - length + 1):
-            j = i + length - 1
-
-            dp[i][j] = float("inf")
-
-            for k in range(i, j):
-                cost = dp[i][k] + dp[k + 1][j] + l[i][0] * l[k][1] * l[j][1]
-                if cost < dp[i][j]:
-                    dp[i][j] = cost
-
-    return dp[0][K - 1]
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
 
-K = int(input().strip())
+def dfs(x, y):
+    if x == N - 1 and y == M - 1:
+        return 1
+
+    if dp[x][y] != -1:
+        return dp[x][y]
+
+    dp[x][y] = 0
+    for d in range(4):
+        nx = x + dx[d]
+        ny = y + dy[d]
+        if 0 <= nx < N and 0 <= ny < M and l[nx][ny] < l[x][y]:
+            dp[x][y] += dfs(nx, ny)
+
+    return dp[x][y]
+
+
+N, M = map(int, input().split())
 l = []
-for _ in range(K):
+dp = [[-1] * M for _ in range(N)]
+valid = 0
+
+for _ in range(N):
     l.append(list(map(int, input().split())))
 
-print(min_merge_cost_dp(K, l))
+print(dfs(0, 0))
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
