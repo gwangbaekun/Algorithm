@@ -6,39 +6,38 @@ import time
 # start = time.time()
 # ----------------
 input = sys.stdin.readline
-sys.setrecursionlimit(300000)
 # ----------------
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
+
+def dp(index, weight_diff):
+    # print(index, weight_diff, memo)
+
+    if (index, weight_diff) in memo:
+        return
+    memo.add((index, weight_diff))
+
+    if index == N:
+        return
+
+    dp(index + 1, weight_diff + weights[index])
+    dp(index + 1, abs(weight_diff - weights[index]))
+    dp(index + 1, weight_diff)
+    dp(index + 1, weights[index])
 
 
-def dfs(x, y):
-    if x == N - 1 and y == M - 1:
-        return 1
+N = int(input())
+weights = list(map(int, input().split()))
+M = int(input())
+check_weight = list(map(int, input().split()))
 
-    if dp[x][y] != -1:
-        return dp[x][y]
+memo = set()
+dp(0, 0)
 
-    dp[x][y] = 0
-    for d in range(4):
-        nx = x + dx[d]
-        ny = y + dy[d]
-        if 0 <= nx < N and 0 <= ny < M and l[nx][ny] < l[x][y]:
-            dp[x][y] += dfs(nx, ny)
+result = []
+for cw in check_weight:
+    result.append("Y" if any(cw == diff for _, diff in memo) else "N")
 
-    return dp[x][y]
-
-
-N, M = map(int, input().split())
-l = []
-dp = [[-1] * M for _ in range(N)]
-valid = 0
-
-for _ in range(N):
-    l.append(list(map(int, input().split())))
-
-print(dfs(0, 0))
+print(" ".join(result))
 
 # 주석------------
 # print(f"time : {time.time() - start:.5f} sec")
