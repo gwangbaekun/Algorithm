@@ -6,24 +6,23 @@ from test_runner import run_cases
 
 
 class Solution:
-    def removeDuplicates(self, nums: List[int]) -> int:
-        idx = 1
+    def majorityElement(self, nums: List[int]) -> int:
+        candidate = 10e9 + 1
         count = 0
-        for i in range(1, len(nums)):
-            if nums[i-1] != nums[i]:
-                nums[idx] = nums[i]
-                idx += 1
-                count = 0
-            elif nums[i-1] == nums[i] and count == 0:
-                nums[idx] = nums[i]
-                idx += 1
-                count += 1
-            elif nums[i-1] == nums[i] and count >= 1:
-                count += 1
-        return idx, nums
 
+        for num in nums:
+            if count == 0:
+                candidate = num
+                count = 1
+            else:
+                if candidate == num:
+                    count += 1
+                else:
+                    count -= 1
+
+        return candidate
 
 
 if __name__ == "__main__":
     case_file = Path(__file__).with_suffix(".txt")
-    run_cases(case_file, Solution().removeDuplicates)
+    run_cases(case_file, Solution().majorityElement)

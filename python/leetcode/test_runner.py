@@ -26,4 +26,4 @@ def run_cases(case_file: str | Path, run_case: Callable[..., Any]) -> None:
             print(f"  input: {input_display}")
             print(f"  result: {result}")
         except Exception as error:
-            print(f"Case {case_number} error: {error}")
+            print(f"Case {case_number} error: {type(error).__name__}: {error}")
