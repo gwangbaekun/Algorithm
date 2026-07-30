@@ -6,22 +6,19 @@ from test_runner import run_cases
 
 
 class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
-        candidate = 10e9 + 1
-        count = 0
+    def rotate(self, nums: List[int], k: int) -> None:
+        n = len(nums)
+        k %= n
 
-        for num in nums:
-            if count == 0:
-                candidate = num
-                count = 1
-            else:
-                if candidate == num:
-                    count += 1
-                else:
-                    count -= 1
+        def reverse(l, r):
+            while l < r:
+                nums[l], nums[r] = nums[r], nums[l]
+                l += 1
+                r -= 1
 
-        return candidate
-
+        reverse(0, n - 1)
+        reverse(0, k - 1)
+        reverse(k, n - 1)
 
 if __name__ == "__main__":
     case_file = Path(__file__).with_suffix(".txt")
