@@ -12,7 +12,7 @@ class Solution:
         for p in prices:
             min_price = min(min_price, p)
             best = max(best, p - min_price)
-        
+        return best
 
 
 if __name__ == "__main__":
