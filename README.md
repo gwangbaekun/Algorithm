@@ -1,32 +1,25 @@
-Given an integer array nums, rotate the array to the right by k steps, where k is non-negative.
+You are given an array prices where prices[i] is the price of a given stock on the ith day.
+
+You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+
+Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
 
  
 
 Example 1:
 
-Input: nums = [1,2,3,4,5,6,7], k = 3
-Output: [5,6,7,1,2,3,4]
-Explanation:
-rotate 1 steps to the right: [7,1,2,3,4,5,6]
-rotate 2 steps to the right: [6,7,1,2,3,4,5]
-rotate 3 steps to the right: [5,6,7,1,2,3,4]
+Input: prices = [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
 Example 2:
 
-Input: nums = [-1,-100,3,99], k = 2
-Output: [3,99,-1,-100]
-Explanation: 
-rotate 1 steps to the right: [99,-1,-100,3]
-rotate 2 steps to the right: [3,99,-1,-100]
+Input: prices = [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transactions are done and the max profit = 0.
  
 
 Constraints:
 
-1 <= nums.length <= 105
--231 <= nums[i] <= 231 - 1
-0 <= k <= 105
- 
-
-Follow up:
-
-Try to come up with as many solutions as you can. There are at least three different ways to solve this problem.
-Could you do it in-place with O(1) extra space
+1 <= prices.length <= 105
+0 <= prices[i] <= 104
