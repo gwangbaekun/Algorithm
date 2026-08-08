@@ -7,12 +7,11 @@ from test_runner import run_cases
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        min_price = float("inf")
-        best = 0
-        for p in prices:
-            min_price = min(min_price, p)
-            best = max(best, p - min_price)
-        return best
+        sum = 0
+        for i in range(1, len(prices)):
+            if prices[i - 1] < prices[i]:
+                sum += prices[i] - prices[i - 1]
+        return sum
 
 
 if __name__ == "__main__":
